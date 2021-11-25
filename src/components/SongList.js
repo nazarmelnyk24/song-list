@@ -36,6 +36,7 @@ export default function SongList({ sort }) {
                                         onClick={() => {
                                             setEditedSong({ artist: song.artist, song: song.song, rating: song.rating, id: song.id });
                                             document.querySelector('.form-edit-container').classList.add('show');
+                                            document.body.style.overflow = 'hidden';
                                         }}
                                     >
                                         Edit

@@ -27,6 +27,7 @@ export default function SongEditForm({ editedSong }) {
                 onSubmit={e => {
                     handleEdit(e, artist, song, rating, editedSong.id);
                     document.querySelector('.form-edit-container').classList.remove('show');
+                    document.body.style.overflow = 'auto';
                 }}
             >
                     <label htmlFor='artist'>Artist:</label>
