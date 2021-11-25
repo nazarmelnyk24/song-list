@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useReducer, useState } from 'react'
 import SongAddForm from './components/SongAddForm'
 import SongList from './components/SongList'
 
@@ -11,13 +11,36 @@ export const ACTIONS = {
 }
 
 export default function App() {
-    const initialList = [
-        { artist: 'Metallica', song: 'Fuel', rating: 10, id: 1 },
-        { artist: 'Moby', song: 'Natural Blues', rating: 10, id: 2 }
-    ]
+    const [sort, setSort] = useState(true);
+    let initialList = [];
+    if(localStorage.getItem('song-list')) {
+        initialList = JSON.parse(localStorage.getItem('song-list'));
+    };
+    
+    const [state, dispatch] = useReducer(reducer, initialList);
 
-    const [state, dispatch] = useReducer(reducer, initialList)
+    localStorage.setItem('song-list', JSON.stringify(state));
 
+    function sortRatingAsc() {
+        state.sort((a,b) => a.rating - b.rating );
+    }
+
+    function sortRatingDesc() {
+        state.sort((a,b) => b.rating - a.rating );
+    }
+
+    function sortRatingToggle() {
+        setSort(prev => { 
+            if(prev === true) {
+                sortRatingAsc();
+                return false;
+            } else {
+                sortRatingDesc();
+                return true;
+            }
+        })
+    }
+    
     function reducer(state, action) {
         switch (action.type) {
             case ACTIONS.ADD_SONG:
@@ -49,7 +72,7 @@ export default function App() {
     return (
         <ContextSongList.Provider value={{ state, handleAdd, handleEdit, dispatch }}>
             <SongAddForm />
-            <SongList />
+            <SongList sort={sortRatingToggle}/>
         </ContextSongList.Provider>
     )
 }

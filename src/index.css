@@ -18,6 +18,13 @@ body {
     font-size: 2rem;
 }
 
+table {
+    table-layout: fixed;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 1000px;
+}
+
 table, td, th {
     border-collapse: collapse;
     padding: 10px;
@@ -26,10 +33,10 @@ table, td, th {
 th {
     font-weight: 700;
     font-size: 1.2rem;
-    width: 120px;
     background-color: hsl(135, 60%, 40%);
     color: rgb(255, 255, 255);
     border: none;
+    overflow: hidden;
 }
 
 th:first-child {
@@ -42,12 +49,15 @@ th:last-child {
     border-bottom-right-radius: 10px;
 }
 
-td:nth-child(3), td:nth-child(4), td:nth-child(5) {
+th:nth-child(3) {
+    cursor: pointer;
+}
+
+td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5) {
     text-align: center;
 }
 
 td {
-    max-width: 120px;
     word-wrap: break-word;
     border-bottom: 2px solid hsl(135, 60%, 40%);
 }
@@ -80,6 +90,24 @@ table button, input[type='button'], input[type='submit'] {
 
 .btn-delete:hover {
     background-color: hsl(20, 70%, 40%);
+}
+
+.btn-small {
+    display: none;
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.rating-color {
+    display: inline-block;
+    width: 30px;
+    height: 25px;
+    border-radius: 50%;
+    color: white;
+    text-shadow: 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 black, -1px -1px 0 black;
+    line-height: 25px;
 }
 
 form {
@@ -167,6 +195,24 @@ input[type='text'] {
 }
 
 @media (max-width: 620px) {
+    table {
+        width: 95%;
+    }
+    th {
+        font-size: 1rem;
+    }
+    td {
+        font-size: 0.8rem;
+    }
+    th:nth-child(1), th:nth-child(2) {
+        width: 25%;
+    }
+    table button {
+        display: none;
+    }
+    .btn-small {
+        display: inline-block;
+    }
     form {
         height: 220px;
         display: flex;
