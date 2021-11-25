@@ -11,7 +11,7 @@ export const ACTIONS = {
 }
 
 export default function App() {
-    const [sort, setSort] = useState(true);
+    const [, setSort] = useState(true);
     let initialList = [];
     if(localStorage.getItem('song-list')) {
         initialList = JSON.parse(localStorage.getItem('song-list'));
